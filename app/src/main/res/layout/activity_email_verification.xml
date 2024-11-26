@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvVerificationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vérification de votre email"
+        android:textSize="20sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/tvInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Un code a été envoyé à votre adresse email.\nVeuillez entrer ce code pour confirmer votre email."
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_below="@id/tvVerificationTitle"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/verificationCodeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/tvInstruction"
+        android:layout_marginTop="24dp">
+
+        <EditText
+            android:id="@+id/etCode1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="*"
+            android:background="@drawable/edittext_rounded"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp" />
+
+        <EditText
+            android:id="@+id/etCode2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="*"
+            android:background="@drawable/edittext_rounded"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp" />
+
+        <EditText
+            android:id="@+id/etCode3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="*"
+            android:background="@drawable/edittext_rounded"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp" />
+
+        <EditText
+            android:id="@+id/etCode4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:hint="*"
+            android:background="@drawable/edittext_rounded"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnVerify"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/verificationCodeContainer"
+        android:layout_marginTop="24dp"
+        android:text="Vérifier"
+        android:background="@drawable/rounded_button"
+        android:textColor="#FFFFFF" />
+</RelativeLayout>

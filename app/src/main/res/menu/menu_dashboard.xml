@@ -1,0 +1,15 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_Dashboard"
+        android:title="Accueil" />
+    <item
+        android:id="@+id/nav_profil"
+        android:title="Profil" />
+    <item
+        android:id="@+id/nav_cursus"
+        android:title="Cursus" />
+    <item
+        android:id="@+id/nav_messages"
+        android:title="Messages" />
+</menu>

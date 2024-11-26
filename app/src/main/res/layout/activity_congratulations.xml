@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/ivSuccess"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_success"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tvSuccessMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Félicitations !"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#2979FF"
+        android:gravity="center"
+        android:layout_below="@id/ivSuccess"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tvSubMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Votre compte a été créé avec succès."
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_below="@id/tvSuccessMessage"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnFinish"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/tvSubMessage"
+        android:text="Se connecter"
+        android:background="@drawable/rounded_button"
+        android:textColor="#FFFFFF" />
+</RelativeLayout>
