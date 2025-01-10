@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfilActivity">
+    tools:context=".Admin.ProfilAdminActivity">
 
     <!-- Toolbar avec un bouton hamburger -->
     <androidx.appcompat.widget.Toolbar
@@ -29,6 +29,16 @@
             android:gravity="center_horizontal"
             android:paddingTop="20dp"
             android:paddingBottom="20dp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="match_parent"
+                android:layout_height="71dp"
+                app:srcCompat="@drawable/img" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="111dp" />
 
             <ImageView
                 android:id="@+id/ivProfilPic"
@@ -78,6 +88,10 @@
                 android:textColor="#757575"
                 android:layout_marginBottom="25dp" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="106dp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -86,14 +100,14 @@
 
             <Button
                 android:id="@+id/btnEditProfil"
-                android:layout_width="match_parent"
+                android:layout_width="302dp"
                 android:layout_height="48dp"
-                android:text="Modifier le profil"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/rounded_button"
+                android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
-                android:layout_gravity="center" />
+                android:background="@drawable/rounded_button"
+                android:text="Modifier le profil"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -110,5 +124,5 @@
         android:layout_gravity="start"
         android:background="@android:color/white"
         android:paddingTop="16dp"
-        app:menu="@menu/menu_dashboard" />
+        app:menu="@menu/menu_dashboardadmin" />
 </androidx.drawerlayout.widget.DrawerLayout>

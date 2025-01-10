@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA"
-    android:padding="20dp">
+    android:orientation="vertical"
+    android:background="#F9F9F9"
+    android:padding="16dp">
+
+    <!-- Titre -->
+
+    <!-- Formulaire dans CardView -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        app:srcCompat="@drawable/img" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="Modifier une note"
+        android:textColor="#3A87F7"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardProfileContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="#FFFFFF"
         app:cardCornerRadius="16dp"
         app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="648dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="20dp">
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                app:srcCompat="@drawable/img" />
-
-            <TextView
-                android:id="@+id/createProfileText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="         Création de votre profil"
-                android:textColor="#333333"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            android:padding="16dp">
 
             <EditText
-                android:id="@+id/etName"
+                android:id="@+id/edit_nom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -47,59 +53,60 @@
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/etFirstName"
+                android:id="@+id/edit_concours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
-                android:hint="Prénom"
+                android:hint="Concours"
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/etDob"
+                android:id="@+id/edit_statut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
-                android:hint="Date de naissance"
+                android:hint="Statut"
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/edit_filiere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
-                android:hint="Adresse email"
+                android:hint="Filière"
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/etPhone"
+                android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
-                android:hint="Numéro de téléphone"
+                android:hint="Email"
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/edit_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
-                android:hint="Mot de passe"
-                android:inputType="textPassword"
+                android:hint="Note"
+                android:inputType="numberDecimal"
                 android:padding="12dp" />
 
+            <!-- Bouton -->
             <Button
-                android:id="@+id/btnContinue"
+                android:id="@+id/save_button"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button"
-                android:text="Continuer"
+                android:padding="12dp"
+                android:text="Modifier"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-</ScrollView>
+</LinearLayout>

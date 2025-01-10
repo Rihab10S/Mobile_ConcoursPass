@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,12 +11,32 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true"
         android:theme="@style/Theme.Concours_passerelle"
         tools:targetApi="31">
         <activity
-            android:name=".DashboardActivity"
+            android:name=".Admin.AdminDashboardActivity"
             android:exported="false"
             android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.Concours_passerelle" />
+
+        <activity
+            android:name=".Admin.EditAnnonceActivity"
+            android:exported="false"
+            android:label="Éditer l'Annonce"
+            android:theme="@style/Theme.Concours_passerelle" />
+
+        <activity
+            android:name=".Candidate.CandidateDashboardActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.Concours_passerelle" />
+        <!-- Declare AnnonceListActivity -->
+        <activity
+            android:name=".Admin.AnnonceListActivity"
+            android:exported="false"
+            android:label="Gestion des Annonces"
             android:theme="@style/Theme.Concours_passerelle" />
         <activity
             android:name=".LoginActivity"
@@ -27,16 +48,35 @@
             android:name=".EmailVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateProfileActivity"
+            android:name=".Candidate.CreateProfileCandidateActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
+
+        <activity android:name=".Admin.CreateAnnonceActivity"
+            android:exported="false"
+            android:label="Creer des Annonces"/>
+
+        <activity android:name=".Admin.PreinscritListActivity"
+            android:exported="false" />
+
         <activity
-            android:name=".ProfilActivity"
+            android:name=".Admin.AddNoteActivity"
             android:exported="false" />
         <activity
-            android:name=".EditProfilActivity"
+            android:name=".Admin.ProfilAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.GestionNotesAdminActivity"
+            android:exported="false" />
+        <activity
+        android:name=".Admin.EditNoteActivity"
+        android:exported="false" />
+
+
+        <activity
+            android:name=".Admin.EditProfilAdminActivity"
             android:exported="false" />
         <activity
             android:name=".LaunchingActivity"

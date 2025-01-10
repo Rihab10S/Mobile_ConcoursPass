@@ -1,54 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F9FA"
     android:padding="20dp">
 
-    <ImageView
-        android:id="@+id/appIcon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/ic_launcher_foreground"
-        tools:src="@drawable/img" />
-
-    <TextView
-        android:id="@+id/welcomeText"
+    <!-- Container -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardWelcomeContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appIcon"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Bienvenue "
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:background="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp">
 
-    <Button
-        android:id="@+id/btnCandidate"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@id/welcomeText"
-        android:text="Je candidate"
-        android:backgroundTint="#2979FF"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button" />
+        <LinearLayout
+            android:layout_width="328dp"
+            android:layout_height="599dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/btnCandidate"
-        android:text="J’accède à mon compte"
-        android:backgroundTint="#2979FF"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="244dp"
+                app:srcCompat="@drawable/img" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="98dp" />
+
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Bienvenue"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnCandidate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_button"
+                android:text="Je candidate"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_button"
+                android:text="J’accède à mon compte"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

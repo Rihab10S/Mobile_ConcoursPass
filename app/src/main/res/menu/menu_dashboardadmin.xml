@@ -1,0 +1,79 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Section principale -->
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_AdminDashboard"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:icon="@android:drawable/ic_menu_revert"
+            android:iconTint="?attr/colorPrimary"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:title="Accueil"
+            android:titleTextColor="?attr/colorPrimaryDark" />
+
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/ic_profile"
+            android:title="Profil"
+            android:iconTint="?attr/colorPrimary"
+            android:titleTextColor="?attr/colorPrimaryDark"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp" />
+
+        <item
+            android:id="@+id/nav_liste_preinscrit"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            android:iconTint="?attr/colorPrimary"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:title="Liste des pré-inscrits"
+            android:titleTextColor="?attr/colorPrimaryDark" />
+    </group>
+
+    <!-- Section de gestion -->
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_Gestion_Annonces"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:icon="@android:drawable/ic_lock_silent_mode_off"
+            android:iconTint="?attr/colorPrimary"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:title="Gestion des Annonces"
+            android:titleTextColor="?attr/colorPrimaryDark" />
+
+        <item
+            android:id="@+id/nav_Getion_notes"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:iconTint="?attr/colorPrimary"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:title="Gestion des Notes"
+            android:titleTextColor="?attr/colorPrimaryDark" />
+        <item
+            android:id="@+id/nav_déconnexion"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:icon="@android:drawable/ic_lock_power_off"
+            android:iconTint="?attr/colorPrimary"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:title="Déconnexion"
+            android:titleTextColor="?attr/colorPrimaryDark" />
+    </group>
+</menu>

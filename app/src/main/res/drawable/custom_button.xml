@@ -1,0 +1,17 @@
+<shape xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="ExtraText">
+    <!-- Dégradé de couleurs -->
+    <gradient
+        android:startColor="#D3D3D3"
+        android:endColor="#C0C0C0"
+        android:angle="90" />
+
+    <!-- Coins arrondis -->
+    <corners android:radius="12dp" />
+
+    <!-- Bordure -->
+    <stroke
+        android:width="2dp"
+        android:color="#A9A9A9" />
+</shape>

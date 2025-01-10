@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="light_red_background">#FFEAEA</color> <!-- Rouge clair pour l'arrière-plan -->
+    <color name="dark_red_text">#D72638</color> <!-- Rouge foncé pour le texte -->
+    <color name="border_red">#FF5C5C</color> <!-- Rouge pour les bordures -->
+    <color name="default_background">#FFFFFF</color> <!-- Fond normal -->
+    <color name="default_text_color">#2D3436</color> <!-- Couleur de texte normale -->
+    <color name="menu_item_icon_color">#636E72</color>  <!-- Gris moyen pour l'icône -->
+    <color name="menu_item_text_color">#2D3436</color>  <!-- Gris foncé pour le texte -->
+    <color name="menu_item_selected_color">#3498db</color>  <!-- Couleur du texte sélectionné -->
+    <color name="colorPrimary">#3B5998</color>  <!-- Couleur principale de l'application -->
+
 </resources>

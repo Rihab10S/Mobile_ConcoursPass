@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <resources>
+        <string-array name="filters">
+            <item>Toutes les Filières</item>
+            <item>Génie Informatique</item>
+            <item>Génie Industriel</item>
+            <item>Génie Civil</item>
+            <item>RST</item>
+            <item>Génie Mécatronique</item>
+            <item>Génie Electrique</item>
+        </string-array>
+    </resources>
+

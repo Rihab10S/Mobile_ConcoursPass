@@ -3,46 +3,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F9FA"
-    android:padding="20dp">
+    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <TextView
-        android:id="@+id/tvLoginTitle"
+    <!-- Login Container -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardLoginContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Se connecter à votre compte"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:background="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp">
 
-    <EditText
-        android:id="@+id/etEmailLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Adresse email"
-        android:layout_below="@id/tvLoginTitle"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_rounded"
-        android:padding="12dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <EditText
-        android:id="@+id/etPasswordLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mot de passe"
-        android:layout_below="@id/etEmailLogin"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_rounded"
-        android:padding="12dp"
-        android:inputType="textPassword" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="189dp"
+                app:srcCompat="@drawable/img" />
 
-    <Button
-        android:id="@+id/btnLoginNow"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/etPasswordLogin"
-        android:layout_marginTop="20dp"
-        android:text="Se connecter"
-        android:background="@drawable/rounded_button"
-        android:textColor="#FFFFFF" />
+            <TextView
+                android:id="@+id/tvLoginTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Se connecter à votre compte"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp" />
+
+            <EditText
+                android:id="@+id/etEmailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Adresse email"
+                android:background="@drawable/edittext_rounded"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/etPasswordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mot de passe"
+                android:background="@drawable/edittext_rounded"
+                android:padding="12dp"
+                android:inputType="textPassword"
+                android:layout_marginBottom="20dp" />
+
+            <Button
+                android:id="@+id/btnLoginNow"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Se connecter"
+                android:background="@drawable/rounded_button"
+                android:textColor="#FFFFFF" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="18dp" />
+
+            <Button
+                android:id="@+id/btnLoginNow2"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_button_r"
+                android:text="Gmail"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

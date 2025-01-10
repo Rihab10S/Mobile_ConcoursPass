@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
+    tools:context=".Candidate.CandidateDashboardActivity">
 
     <!-- Toolbar avec un bouton hamburger -->
     <androidx.appcompat.widget.Toolbar
@@ -25,7 +25,7 @@
             android:id="@+id/textViewMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bienvenue dans le Dashboard"
+            android:text="Bienvenue dans le Dashboard candidat"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
@@ -37,5 +37,5 @@
         android:layout_gravity="start"
         android:background="@android:color/white"
         android:paddingTop="16dp"
-        app:menu="@menu/menu_dashboard"/>
+        app:menu="@menu/menu_dashboardcandidate"/>
 </androidx.drawerlayout.widget.DrawerLayout>
