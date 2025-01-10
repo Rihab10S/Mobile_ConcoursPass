@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Image header -->
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            app:srcCompat="@drawable/img" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <!-- Title Text -->
+        <TextView
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:text="Ajouter une annonce"
+            android:textColor="#3A87F7"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- CardView for form inputs -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="596dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title EditText -->
+                <EditText
+                    android:id="@+id/annonce_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_rounded"
+                    android:hint="Titre de l'annonce"
+                    android:padding="12dp" />
+
+                <!-- Visibility EditText -->
+                <EditText
+                    android:id="@+id/annonce_visibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_rounded"
+                    android:hint="Visibilité (Public/Privé)"
+                    android:padding="12dp" />
+
+                <!-- Status EditText -->
+                <EditText
+                    android:id="@+id/annonce_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_rounded"
+                    android:hint="Statut (Actif/Inactif)"
+                    android:padding="12dp" />
+
+                <!-- Type EditText -->
+                <EditText
+                    android:id="@+id/annonce_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_rounded"
+                    android:hint="Type d'annonce"
+                    android:padding="12dp" />
+
+                <!-- Content EditText -->
+                <EditText
+                    android:id="@+id/annonce_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_rounded"
+                    android:hint="Contenu de l'annonce"
+                    android:inputType="textMultiLine"
+                    android:padding="12dp" />
+
+                <!-- Button to submit -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp">
+
+                    <Button
+                        android:id="@+id/create_annonce_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_button"
+                        android:padding="12dp"
+                        android:text="Ajouter annonce"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>
