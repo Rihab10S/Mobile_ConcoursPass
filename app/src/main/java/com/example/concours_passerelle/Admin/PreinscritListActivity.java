@@ -208,7 +208,7 @@ public class PreinscritListActivity extends AppCompatActivity {
 
                 // Ajouter des en-têtes au tableau avec style
                 table.addHeaderCell(new Cell()
-                        .add(new Paragraph("Nom Complet").setFont(boldFont).setFontSize(18)) // Agrandir la taille de la police des en-têtes
+                        .add(new Paragraph("Nom ").setFont(boldFont).setFontSize(18)) // Agrandir la taille de la police des en-têtes
                         .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
                         .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
                         .setPadding(10));

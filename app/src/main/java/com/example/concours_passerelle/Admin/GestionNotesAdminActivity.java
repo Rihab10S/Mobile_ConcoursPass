@@ -2,35 +2,58 @@ package com.example.concours_passerelle.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.HorizontalScrollView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.concours_passerelle.Candidat;
 import com.example.concours_passerelle.Note;
 import com.example.concours_passerelle.NoteAdapter;
 import com.example.concours_passerelle.R;
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.UnitValue;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.util.Log;
+
 public class GestionNotesAdminActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private NoteAdapter noteAdapter;
     private Spinner spinner;
+    private EditText seuilEditText;
     private View emptyView;
+    private Button telechargerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,46 +61,91 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notesadmin);
 
         // Initialisation des vues
+        initViews();
+
+        // Configuration du RecyclerView
+        setupRecyclerView();
+
+        // Configuration du TextWatcher pour le seuil
+        setupSeuilTextWatcher();
+
+        // Configuration du Spinner pour filtrer par filière
+        setupSpinnerListener();
+
+        // Button click listener pour générer le PDF
+        setupDownloadButton();
+
+        // Charger les notes sans filtre au démarrage
+        fetchNotes("");
+    }
+
+    private void initViews() {
         recyclerView = findViewById(R.id.recyclerView);
         spinner = findViewById(R.id.filter_spinner);
         emptyView = findViewById(R.id.empty_view);
+        seuilEditText = findViewById(R.id.filter_edit_text);
+        telechargerBtn = findViewById(R.id.btn_telecharger_liste_orale);
+    }
 
-        // Configuration du RecyclerView
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Ensures vertical scrolling
+    private void setupRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
-        // Initialisation de l'adaptateur
+        // Initialisation de l'adaptateur avec une liste vide au départ
         noteAdapter = new NoteAdapter(new ArrayList<>());
         recyclerView.setAdapter(noteAdapter);
+    }
 
-        // Configuration du Spinner pour filtrer par filière
+    private void setupSeuilTextWatcher() {
+        seuilEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (!charSequence.toString().isEmpty()) {
+                    double seuil = Double.parseDouble(charSequence.toString());
+                    noteAdapter.setSeuil(seuil);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+    }
+
+    private void setupSpinnerListener() {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String filiere = parentView.getItemAtPosition(position).toString();
-                // Appeler la fonction pour récupérer les notes selon la filière choisie
-                fetchNotes(filiere);
+                fetchNotes(filiere);  // Appel pour récupérer les notes filtrées
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Nothing to do here
+            public void onNothingSelected(AdapterView<?> parentView) {}
+        });
+    }
+
+    private void setupDownloadButton() {
+        telechargerBtn.setOnClickListener(view -> {
+            if (noteAdapter != null) {
+                List<Note> candidatsAuDessusDuSeuil = noteAdapter.getCandidatsAuDessusDuSeuil();
+                if (!candidatsAuDessusDuSeuil.isEmpty()) {
+                    generatePDF(candidatsAuDessusDuSeuil);
+                } else {
+                    Toast.makeText(this, "Aucun candidat au-dessus du seuil.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-        // Charger les notes sans filtre au départ
-        fetchNotes("");
     }
 
     private void fetchNotes(String filiere) {
         NoteApi api = RetrofitInstance.getApi();
-
-        // Appeler l'API en fonction du filtre (filière vide pour toutes les notes)
-        Call<List<Note>> call = filiere.equals("Toutes les Filières") || filiere.isEmpty()
+        Call<List<Note>> call = filiere.isEmpty() || "Toutes les Filières".equals(filiere)
                 ? api.getNotes()  // Appel pour toutes les notes
-                : api.getNotesByFiliere(filiere);  // Appel avec filtre de la filière
+                : api.getNotesByFiliere(filiere);  // Appel pour une filière spécifique
 
-        // Effectuer la requête API
         call.enqueue(new Callback<List<Note>>() {
             @Override
             public void onResponse(Call<List<Note>> call, Response<List<Note>> response) {
@@ -103,13 +171,87 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
         });
     }
 
-    public void openAddNoteActivity(View view) {
-        Intent intent = new Intent(this, AddNoteActivity.class);
-        startActivity(intent);
-    }
-
     private void showError(String message) {
         Log.e("GestionNotesAdminActivity", message);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void generatePDF(List<Note> candidatsAuDessusDuSeuil) {
+        try {
+            String filePath = getExternalFilesDir(null) + "/Oral.pdf";
+            PdfWriter writer = new PdfWriter(filePath);
+            PdfDocument pdfDocument = new PdfDocument(writer);
+            Document document = new Document(pdfDocument);
+
+            // Charger et ajouter le logo
+            InputStream logoStream = getResources().openRawResource(R.drawable.logo_ensa);
+            byte[] logoBytes = new byte[logoStream.available()];
+            logoStream.read(logoBytes);
+            logoStream.close();
+
+            ImageData imageData = ImageDataFactory.create(logoBytes);
+            Image logo = new Image(imageData).setWidth(120).setHeight(120).setHorizontalAlignment(HorizontalAlignment.CENTER);
+            document.add(logo);
+
+            // Ajouter un titre et un sous-titre
+            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+            PdfFont boldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+            document.add(new Paragraph("Listes des candidats convoqués pour passer l'oral")
+                    .setFont(boldFont).setFontSize(24).setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                    .setFontColor(com.itextpdf.kernel.colors.ColorConstants.BLUE).setMarginBottom(10));
+
+            document.add(new Paragraph("Année Universitaire 2025-2026")
+                    .setFont(font).setFontSize(20).setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                    .setFontColor(com.itextpdf.kernel.colors.ColorConstants.GRAY).setMarginBottom(20));
+// Grouper les notes par filière et générer les tableaux
+            Map<String, List<Note>> candidatsParFiliere = candidatsAuDessusDuSeuil.stream()
+                    .collect(Collectors.groupingBy(Note::getFiliere));
+
+            for (Map.Entry<String, List<Note>> entry : candidatsParFiliere.entrySet()) {
+                // Ajouter le titre de la filière
+                document.add(new Paragraph(entry.getKey())
+                        .setFont(boldFont).setFontSize(18).setFontColor(com.itextpdf.kernel.colors.ColorConstants.DARK_GRAY)
+                        .setMarginTop(15).setMarginBottom(5));
+
+                // Création du tableau avec 2 colonnes : Nom et Filière
+                Table table = new Table(new float[]{4, 4}).setWidth(UnitValue.createPercentValue(95))
+                        .setMarginTop(15).setMarginBottom(15);
+
+                // Ajouter les en-têtes du tableau
+                table.addHeaderCell(new Cell().add(new Paragraph("Nom").setFont(boldFont).setFontSize(18))
+                        .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
+                        .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER).setPadding(10));
+                table.addHeaderCell(new Cell().add(new Paragraph("Filière").setFont(boldFont).setFontSize(18))
+                        .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
+                        .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER).setPadding(10));
+
+                // Ajouter les données des candidats dans le tableau
+                for (Note note : entry.getValue()) {
+                    // Ajouter une ligne pour chaque candidat avec son nom et sa filière
+                    table.addCell(new Cell().add(new Paragraph(note.getNom()).setFont(font).setFontSize(20))
+                            .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                            .setPadding(8));
+                    table.addCell(new Cell().add(new Paragraph(note.getFiliere()).setFont(font).setFontSize(20))
+                            .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                            .setPadding(8));
+                }
+
+                // Ajouter le tableau au document
+                document.add(table);
+            }
+
+
+
+
+            document.close();
+            Toast.makeText(this, "PDF généré : " + filePath, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur lors de la génération du PDF", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void openAddNoteActivity(View view) {
+        startActivity(new Intent(this, AddNoteActivity.class));
     }
 }

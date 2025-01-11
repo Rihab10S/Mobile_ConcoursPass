@@ -2,6 +2,9 @@ package com.example.concours_passerelle;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import com.example.concours_passerelle.Admin.EditNoteActivity;
 import com.example.concours_passerelle.Admin.NoteApi;
 import com.example.concours_passerelle.Admin.RetrofitInstance;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,9 +28,15 @@ import retrofit2.Response;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
     private List<Note> notes;
+    private double seuil = -1; // Valeur par défaut (aucun seuil appliqué)
 
     public NoteAdapter(List<Note> notes) {
         this.notes = notes;
+    }
+
+    public void setSeuil(double seuil) {
+        this.seuil = seuil;
+        notifyDataSetChanged();  // Re-render all the items when the seuil is updated
     }
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
@@ -72,6 +82,23 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         holder.filiereTextView.setText(note.getFiliere());
         holder.emailTextView.setText(note.getEmail());
 
+        // Appliquer la couleur et le style en fonction du seuil
+        if (seuil >= 0) {
+            if (note.getNote() < seuil) {
+                // Si la note est en dessous du seuil
+                holder.itemView.setBackgroundColor(Color.parseColor("#FFEAEA")); // Fond rouge clair
+                holder.noteTextView.setTextColor(Color.parseColor("#D72638")); // Texte rouge foncé
+                holder.noteTextView.setTypeface(Typeface.DEFAULT_BOLD); // Texte en gras
+                holder.noteTextView.setBackground(createBorderDrawable("#FF5C5C")); // Bordure rouge
+            } else {
+                // Si la note est au-dessus du seuil
+                holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF")); // Fond blanc
+                holder.noteTextView.setTextColor(Color.parseColor("#2D3436")); // Texte noir
+                holder.noteTextView.setTypeface(Typeface.DEFAULT); // Texte normal
+                holder.noteTextView.setBackground(null); // Pas de bordure
+            }
+        }
+
         // Événement pour supprimer la note
         holder.deleteButton.setOnClickListener(v -> {
             deleteNote(note.getId().intValue(), position, holder.itemView.getContext());
@@ -91,6 +118,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             intent.putExtra("noteValue", note.getNote());
             holder.itemView.getContext().startActivity(intent);
         });
+    }
+
+    private GradientDrawable createBorderDrawable(String colorHex) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.parseColor("#FFEAEA")); // Fond rouge clair
+        drawable.setCornerRadius(12); // Coins arrondis
+        drawable.setStroke(2, Color.parseColor(colorHex)); // Bordure rouge foncé
+        return drawable;
     }
 
     private void deleteNote(int noteId, int position, Context context) {
@@ -121,6 +156,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     @Override
     public int getItemCount() {
         return notes.size();
+    }
+    public List<Note> getCandidatsAuDessusDuSeuil() {
+        List<Note> candidatsAuDessusDuSeuil = new ArrayList<>();
+        for (Note note : notes) {
+            if (note.getNote() >= seuil) {
+                candidatsAuDessusDuSeuil.add(note);
+            }
+        }
+        return candidatsAuDessusDuSeuil;
     }
 
     public void updateNotes(List<Note> newNotes) {
