@@ -53,6 +53,8 @@ android {
     }
 }
 
+
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -78,6 +80,11 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("com.itextpdf:itext7-core:7.2.3")
+
+
+
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

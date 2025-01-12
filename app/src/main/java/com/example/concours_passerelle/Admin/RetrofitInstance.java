@@ -25,7 +25,7 @@ public class RetrofitInstance {
             client = new OkHttpClient.Builder()
                     .addInterceptor(chain -> {
                         okhttp3.Request request = chain.request().newBuilder()
-                                .addHeader("Authorization", " Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZTFAZ21haWwuY29tIiwiZXhwIjoxNzM2Njk2NTg0fQ.e_CqkGZslZcC_dxmRefTzAxn30LilimTsE-gOgIfBnt7HyXk5N_coBXlO4yszUrwzKiI05CG_SIQm1Mh_kv2Bw")
+                                .addHeader("Authorization", " Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXJpaGFiMTIzQGdtYWlsLmNvbSIsImV4cCI6MTczNzU2NDIzN30.11KI0082IVW1urPep2fOAyqMUj7V7h7hdMFxOSIAMpoG-MF96enHPA2POV7rthcn1j-lqgBicycpL74ykpKFFA")
                                 .build();
                         return chain.proceed(request);
                     })

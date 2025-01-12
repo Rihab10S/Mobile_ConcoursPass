@@ -62,7 +62,8 @@ public class AnnonceListActivity extends AppCompatActivity {
                     List<Annonce> annonces = response.body();
                     if (annonces != null && !annonces.isEmpty()) {
                         // Mise à jour de l'adaptateur avec les annonces récupérées
-                        adapter = new AnnonceAdapter(annonces);
+                        adapter = new AnnonceAdapter(annonces, false);
+
                         recyclerView.setAdapter(adapter);
                         Toast.makeText(AnnonceListActivity.this, "Annonces chargées avec succès.", Toast.LENGTH_SHORT).show();
                     } else {

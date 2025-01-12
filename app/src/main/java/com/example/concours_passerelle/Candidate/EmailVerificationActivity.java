@@ -1,9 +1,10 @@
-package com.example.concours_passerelle;
+package com.example.concours_passerelle.Candidate;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.concours_passerelle.R;
 
 public class EmailVerificationActivity extends AppCompatActivity {
     @Override

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +22,15 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceViewHolder> {
 
     private List<Annonce> annonces;
+    private boolean isDashboard;
 
-    public AnnonceAdapter(List<Annonce> annonces) {
+    public AnnonceAdapter(List<Annonce> annonces, boolean isDashboard) {
         this.annonces = annonces;
+        this.isDashboard = isDashboard;
     }
 
     public static class AnnonceViewHolder extends RecyclerView.ViewHolder {
@@ -39,23 +41,22 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         public TextView typeTextView;
         public TextView contentTextView;
         public TextView createdAtTextView;
-        public TextView annonceIdTextView; // Added for annonce_id
+        public TextView annonceIdTextView;
         public Button deleteButton;
         public Button editButton;
 
         public AnnonceViewHolder(View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.annonce_title); // Corrected ID
-            visibilityTextView = itemView.findViewById(R.id.visibility_text); // Corrected ID
-            statusTextView = itemView.findViewById(R.id.status_text); // Corrected ID
-            typeTextView = itemView.findViewById(R.id.type_text); // Corrected ID
-            contentTextView = itemView.findViewById(R.id.content_text); // Corrected ID
+            titleTextView = itemView.findViewById(R.id.annonce_title);
+            visibilityTextView = itemView.findViewById(R.id.visibility_text);
+            statusTextView = itemView.findViewById(R.id.status_text);
+            typeTextView = itemView.findViewById(R.id.type_text);
+            contentTextView = itemView.findViewById(R.id.content_text);
             createdAtTextView = itemView.findViewById(R.id.created_at_text);
-            annonceIdTextView = itemView.findViewById(R.id.annonce_id); // New ID for annonce_id// Corrected ID
+            annonceIdTextView = itemView.findViewById(R.id.annonce_id);
             deleteButton = itemView.findViewById(R.id.delete_button);
             editButton = itemView.findViewById(R.id.edit_button);
         }
-
     }
 
     @Override
@@ -67,48 +68,54 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
     @Override
     public void onBindViewHolder(AnnonceViewHolder holder, int position) {
         Annonce annonce = annonces.get(position);
-        // Set default values if the field is null
-        holder.annonceIdTextView.setText(annonce.getId() != null ? annonce.getId().toString() : "ID inconnu");
-        holder.titleTextView.setText(annonce.getTitle() != null ? annonce.getTitle() : "Titre inconnu");
-        holder.visibilityTextView.setText(annonce.getVisibility() != null ? annonce.getVisibility() : "Inconnu");
-        holder.statusTextView.setText(annonce.getStatus() != null ? annonce.getStatus() : "Inconnu");
-        holder.typeTextView.setText(annonce.getType() != null ? annonce.getType() : "Inconnu");
-        holder.contentTextView.setText(annonce.getContent() != null ? annonce.getContent() : "Pas de contenu");
 
-        // Handle createdAt with null check
-        holder.createdAtTextView.setText(annonce.getCreatedAt() != null ? annonce.getCreatedAt().toString() : "Date inconnue");
+        // Configurer les données de l'annonce
+        holder.annonceIdTextView.setText(getTextOrDefault(annonce.getId(), "ID inconnu"));
+        holder.titleTextView.setText(getTextOrDefault(annonce.getTitle(), "Titre inconnu"));
+        holder.visibilityTextView.setText(getTextOrDefault(annonce.getVisibility(), "Inconnu"));
+        holder.statusTextView.setText(getTextOrDefault(annonce.getStatus(), "Inconnu"));
+        holder.typeTextView.setText(getTextOrDefault(annonce.getType(), "Inconnu"));
+        holder.contentTextView.setText(getTextOrDefault(annonce.getContent(), "Pas de contenu"));
+        holder.createdAtTextView.setText(getTextOrDefault(annonce.getCreatedAt(), "Date inconnue"));
 
-        // Event to delete the annonce
-        holder.deleteButton.setOnClickListener(v -> {
-            deleteAnnonce(annonce.getId(), position, holder.itemView.getContext());
-        });
+        // Configurer la visibilité des boutons
+        configureButtonsVisibility(holder, isDashboard);
 
-        // Event to edit the annonce
-        holder.editButton.setOnClickListener(v -> {
-            // Create an Intent to open the edit activity
-            Intent intent = new Intent(holder.itemView.getContext(), EditAnnonceActivity.class);
-            // Pass the annonce data to the edit activity
-            intent.putExtra("annonceId", annonce.getId());
-            intent.putExtra("annonceTitle", annonce.getTitle());
-            intent.putExtra("annonceVisibility", annonce.getVisibility());
-            intent.putExtra("annonceStatus", annonce.getStatus());
-            intent.putExtra("annonceType", annonce.getType());
-            intent.putExtra("annonceContent", annonce.getContent());
-            intent.putExtra("annonceCreatedAt", annonce.getCreatedAt() != null ? annonce.getCreatedAt().toString() : "Date inconnue");
-            holder.itemView.getContext().startActivity(intent);
-        });
+        // Définir les actions des boutons
+        holder.deleteButton.setOnClickListener(v -> deleteAnnonce(annonce.getId(), position, holder.itemView.getContext()));
+        holder.editButton.setOnClickListener(v -> openEditActivity(holder.itemView.getContext(), annonce));
+    }
+
+    private void configureButtonsVisibility(AnnonceViewHolder holder, boolean isDashboard) {
+        int visibility = isDashboard ? View.GONE : View.VISIBLE;
+        holder.deleteButton.setVisibility(visibility);
+        holder.editButton.setVisibility(visibility);
+    }
+
+    private String getTextOrDefault(Object value, String defaultValue) {
+        return value != null ? value.toString() : defaultValue;
+    }
+
+    private void openEditActivity(Context context, Annonce annonce) {
+        Intent intent = new Intent(context, EditAnnonceActivity.class);
+        intent.putExtra("annonceId", annonce.getId());
+        intent.putExtra("annonceTitle", annonce.getTitle());
+        intent.putExtra("annonceVisibility", annonce.getVisibility());
+        intent.putExtra("annonceStatus", annonce.getStatus());
+        intent.putExtra("annonceType", annonce.getType());
+        intent.putExtra("annonceContent", annonce.getContent());
+        intent.putExtra("annonceCreatedAt", getTextOrDefault(annonce.getCreatedAt(), "Date inconnue"));
+        context.startActivity(intent);
     }
 
     private void deleteAnnonce(Long annonceId, int position, Context context) {
         AnnonceApi api = RetrofitInstance.getAnnonceApi();
-
-        // Make the API request to delete the annonce
         Call<Void> call = api.deleteAnnonce(annonceId);
+
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // Remove the item from the list
                     annonces.remove(position);
                     notifyItemRemoved(position);
                     Toast.makeText(context, "Annonce supprimée avec succès", Toast.LENGTH_SHORT).show();
@@ -135,4 +142,3 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         notifyDataSetChanged();
     }
 }
-

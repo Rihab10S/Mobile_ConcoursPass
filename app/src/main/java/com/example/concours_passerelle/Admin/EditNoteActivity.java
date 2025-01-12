@@ -98,7 +98,6 @@ public class EditNoteActivity extends AppCompatActivity {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(EditNoteActivity.this, "Note mise à jour avec succès", Toast.LENGTH_SHORT).show();
-
                         // Rediriger vers la page des notes après la mise à jour
                         Intent intent = new Intent(EditNoteActivity.this, GestionNotesAdminActivity.class); // Remplacez 'NotesActivity' par l'activité qui affiche les notes
                         startActivity(intent);

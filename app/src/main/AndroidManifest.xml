@@ -18,7 +18,7 @@
         <activity
             android:name=".Admin.AdminDashboardActivity"
             android:exported="false"
-            android:label="@string/title_activity_dashboard"
+            android:label=""
             android:theme="@style/Theme.Concours_passerelle" />
 
         <activity

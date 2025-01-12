@@ -1,5 +1,6 @@
 package com.example.concours_passerelle.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Button;
@@ -74,7 +75,10 @@ public class EditAnnonceActivity extends AppCompatActivity {
                 public void onResponse(Call<Annonce> call, Response<Annonce> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(EditAnnonceActivity.this, "Annonce modifiée avec succès", Toast.LENGTH_SHORT).show();
-                        finish(); // Ferme l'activité après la modification
+                        // Rediriger vers la liste des annonces
+                        Intent intent = new Intent(EditAnnonceActivity.this, AnnonceListActivity.class);
+                        startActivity(intent);
+                        finish(); // Fermer l'activité actuelle
                     } else {
                         Toast.makeText(EditAnnonceActivity.this, "Échec de la modification de l'annonce", Toast.LENGTH_SHORT).show();
                     }

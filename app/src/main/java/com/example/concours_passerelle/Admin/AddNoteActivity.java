@@ -31,7 +31,7 @@ public class AddNoteActivity extends AppCompatActivity {
     private Button btnSubmit;
 
     // Token d'authentification
-    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZTFAZ21haWwuY29tIiwiZXhwIjoxNzM2Njk2NTg0fQ.e_CqkGZslZcC_dxmRefTzAxn30LilimTsE-gOgIfBnt7HyXk5N_coBXlO4yszUrwzKiI05CG_SIQm1Mh_kv2Bw";
+    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXJpaGFiMTIzQGdtYWlsLmNvbSIsImV4cCI6MTczNzU2NDIzN30.11KI0082IVW1urPep2fOAyqMUj7V7h7hdMFxOSIAMpoG-MF96enHPA2POV7rthcn1j-lqgBicycpL74ykpKFFA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
