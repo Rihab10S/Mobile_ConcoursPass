@@ -73,16 +73,16 @@ public class EditAnnonceActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Annonce> call, Response<Annonce> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(EditAnnonceActivity.this, "Annonce updated successfully", Toast.LENGTH_SHORT).show();
-                        finish(); // Close the activity after saving
+                        Toast.makeText(EditAnnonceActivity.this, "Annonce modifiée avec succès", Toast.LENGTH_SHORT).show();
+                        finish(); // Ferme l'activité après la modification
                     } else {
-                        Toast.makeText(EditAnnonceActivity.this, "Failed to update annonce", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditAnnonceActivity.this, "Échec de la modification de l'annonce", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Annonce> call, Throwable t) {
-                    Toast.makeText(EditAnnonceActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditAnnonceActivity.this, "Erreur : " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });

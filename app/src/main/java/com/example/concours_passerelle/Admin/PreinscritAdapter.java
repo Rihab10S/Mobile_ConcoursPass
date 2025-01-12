@@ -58,7 +58,7 @@ public class PreinscritAdapter extends RecyclerView.Adapter<PreinscritAdapter.Ca
         Candidat candidat = candidats.get(position);
 
         // Remplir les champs de texte avec les données du candidat
-        holder.tvNom.setText(candidat.getNom());
+        holder.tvNom.setText(candidat.getNomComplet());
         holder.tvCin.setText(candidat.getCin());
         holder.tvCodeEtudiant.setText(candidat.getCodeEtudiant());
         holder.tvFiliere.setText(candidat.getFiliereChoisi());

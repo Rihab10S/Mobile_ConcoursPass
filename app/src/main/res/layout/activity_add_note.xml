@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/edittext_rounded"
-                    android:hint="Nom"
+                    android:hint="Nom et prénom"
                     android:padding="12dp" />
 
                 <EditText
@@ -68,14 +68,7 @@
                     android:hint="Concours"
                     android:padding="12dp" />
 
-                <EditText
-                    android:id="@+id/edit_statut"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/edittext_rounded"
-                    android:hint="Statut"
-                    android:padding="12dp" />
+
 
                 <EditText
                     android:id="@+id/edit_note"
@@ -97,12 +90,12 @@
                     android:padding="12dp" />
 
                 <EditText
-                    android:id="@+id/edit_email"
+                    android:id="@+id/edit_CIN"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/edittext_rounded"
-                    android:hint="Email"
+                    android:hint="CIN"
                     android:padding="12dp" />
 
                 <!-- Boutons -->

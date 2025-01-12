@@ -89,9 +89,9 @@
             <!-- Buttons Section -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:layout_height="130dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_telecharger_liste_orale"
@@ -103,7 +103,20 @@
                     android:padding="12dp"
                     android:text="Télécharger la liste de l'oral"
                     android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_telecharger_liste_finale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/custom_button"
+                    android:clickable="true"
+                    android:enabled="true"
+                    android:padding="12dp"
+                    android:text="Télécharger les Résultats Finaux"
+                    android:textColor="@color/black" />
             </LinearLayout>
+
 
 
             <LinearLayout
@@ -117,25 +130,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:backgroundTint="@android:color/holo_blue_dark"
-                    android:text="AJOUTER"
+                    android:backgroundTint="#4CAF50"
+                    android:text="AJOUTER une nouvelle NOTE"
                     android:onClick="openAddNoteActivity"
                     android:textColor="#FFFFFF" />
-                <Button
-                    android:id="@+id/download_csv_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@android:color/holo_red_light"
-                    android:text="TÉLÉCHARGER CSV"
-                    android:textColor="#FFFFFF" />
-                <Button
-                    android:id="@+id/send_emails_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/holo_green_light"
-                    android:text="ENVOYER EMAILS"
-                    android:textColor="#FFFFFF" />
+
             </LinearLayout>
 
             <!-- Notes List -->

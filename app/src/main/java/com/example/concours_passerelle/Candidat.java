@@ -2,6 +2,7 @@ package com.example.concours_passerelle;
 public class Candidat {
     private Long idCandidat;
     private String nom;
+    private String prenom;
     private String cin;
     private String codeEtudiant;
     private String filiereChoisi;
@@ -26,6 +27,13 @@ public class Candidat {
         this.nom = nom;
     }
 
+    public String getPrenom() {  // Getter pour le prénom
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {  // Setter pour le prénom
+        this.prenom = prenom;
+    }
     public String getCin() {
         return cin;
     }
@@ -54,6 +62,9 @@ public class Candidat {
         return (notePremiereAnnee + noteDeuxiemeAnnee) / 2;
     }
 
+    public String getNomComplet() {
+        return nom + " " + prenom; // Combinaison du nom et prénom
+    }
     public void setNoteMoyenne(double noteMoyenne) {
         this.noteMoyenne = noteMoyenne;
     }

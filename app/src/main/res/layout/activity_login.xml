@@ -49,15 +49,36 @@
                 android:padding="12dp"
                 android:layout_marginBottom="16dp" />
 
-            <EditText
-                android:id="@+id/etPasswordLogin"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mot de passe"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <!-- EditText pour le mot de passe -->
+                <EditText
+                    android:id="@+id/etPasswordLogin"
+                    android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/edittext_rounded"
-                android:padding="12dp"
+                android:hint="Mot de passe"
                 android:inputType="textPassword"
-                android:layout_marginBottom="20dp" />
+                android:padding="12dp" />
+
+                <!-- ImageView pour l'icône de l'œil -->
+                <ImageView
+                    android:id="@+id/eyeIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                android:src="@drawable/ic_eye_off"
+                android:contentDescription="Afficher/Masquer mot de passe"
+                android:clickable="true"
+                android:focusable="true" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnLoginNow"

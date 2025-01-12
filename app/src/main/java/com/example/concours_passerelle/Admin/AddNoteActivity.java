@@ -25,10 +25,9 @@ public class AddNoteActivity extends AppCompatActivity {
 
     private EditText editName;
     private EditText editConcours;
-    private EditText editStatut;
     private EditText editNote;
     private EditText editFiliere;
-    private EditText editEmail;
+    private EditText editCIN;
     private Button btnSubmit;
 
     // Token d'authentification
@@ -42,10 +41,9 @@ public class AddNoteActivity extends AppCompatActivity {
         // Initialisation des vues
         editName = findViewById(R.id.edit_name);
         editConcours = findViewById(R.id.edit_concours);
-        editStatut = findViewById(R.id.edit_statut);
         editNote = findViewById(R.id.edit_note);
         editFiliere = findViewById(R.id.edit_filiere);
-        editEmail = findViewById(R.id.edit_email);
+        editCIN = findViewById(R.id.edit_CIN);
         btnSubmit = findViewById(R.id.btn_submit);
 
         // Listener pour le bouton "Ajouter"
@@ -60,13 +58,12 @@ public class AddNoteActivity extends AppCompatActivity {
     private void submitNote() {
         String nom = editName.getText().toString();
         String concours = editConcours.getText().toString();
-        String statut = editStatut.getText().toString();
         String noteString = editNote.getText().toString();
         String filiere = editFiliere.getText().toString();
-        String email = editEmail.getText().toString();
+        String CIN = editCIN.getText().toString();
 
         // Vérification des champs
-        if (nom.isEmpty() || concours.isEmpty() || statut.isEmpty() || noteString.isEmpty() || filiere.isEmpty() || email.isEmpty()) {
+        if (nom.isEmpty() || concours.isEmpty()  || noteString.isEmpty() || filiere.isEmpty() || CIN.isEmpty()) {
             Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -81,7 +78,8 @@ public class AddNoteActivity extends AppCompatActivity {
         }
 
         // Création de l'objet Note
-        Note newNote = new Note(nom, concours, statut, note, filiere, email);
+
+        Note newNote = new Note(nom, concours, note, filiere, CIN);
 
         // Appel à l'API pour enregistrer la note
         saveNoteToApi(newNote);

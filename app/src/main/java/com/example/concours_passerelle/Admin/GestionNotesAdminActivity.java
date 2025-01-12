@@ -54,6 +54,7 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
     private EditText seuilEditText;
     private View emptyView;
     private Button telechargerBtn;
+    private Button telechargerBtnAdmis ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,9 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
         // Button click listener pour générer le PDF
         setupDownloadButton();
 
+        // Button click listener pour générer le PDF
+        setupDownloadButtonResultat();
+
         // Charger les notes sans filtre au démarrage
         fetchNotes("");
     }
@@ -85,6 +89,7 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
         emptyView = findViewById(R.id.empty_view);
         seuilEditText = findViewById(R.id.filter_edit_text);
         telechargerBtn = findViewById(R.id.btn_telecharger_liste_orale);
+        telechargerBtnAdmis = findViewById(R.id.btn_telecharger_liste_finale);
     }
 
     private void setupRecyclerView() {
@@ -139,6 +144,35 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
             }
         });
     }
+    private void setupDownloadButtonResultat() {
+        telechargerBtnAdmis.setOnClickListener(view -> {
+            if (noteAdapter != null) {
+                // Vérifier si tous les statuts sont remplis
+                boolean tousStatutsRemplis = true;
+                for (Note note : noteAdapter.getNotes()) {
+                    if (note.getStatutOral() == null || note.getStatutOral().isEmpty()) {
+                        tousStatutsRemplis = false;
+                        break;  // Si un statut est vide, on interrompt la boucle
+                    }
+                }
+
+                if (tousStatutsRemplis) {
+                    // Récupérer les candidats ayant le statut "admis"
+                    List<Note> candidatsAdmis = noteAdapter.getCandidatsAdmis();
+                    if (!candidatsAdmis.isEmpty()) {
+                        // Générer le PDF avec les candidats "admis"
+                        generatePDFResultat(candidatsAdmis);
+                    } else {
+                        Toast.makeText(this, "Aucun candidat admis.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Afficher un message pour informer l'utilisateur qu'il faut entrer les résultats de l'oral
+                    Toast.makeText(this, "Vous devez entrer les résultats de l'oral pour tous les candidats.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 
     private void fetchNotes(String filiere) {
         NoteApi api = RetrofitInstance.getApi();
@@ -196,7 +230,7 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
             // Ajouter un titre et un sous-titre
             PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
             PdfFont boldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
-            document.add(new Paragraph("Listes des candidats convoqués pour passer l'oral")
+            document.add(new Paragraph("Liste des candidats convoqués pour passer l'oral")
                     .setFont(boldFont).setFontSize(24).setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
                     .setFontColor(com.itextpdf.kernel.colors.ColorConstants.BLUE).setMarginBottom(10));
 
@@ -213,12 +247,18 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
                         .setFont(boldFont).setFontSize(18).setFontColor(com.itextpdf.kernel.colors.ColorConstants.DARK_GRAY)
                         .setMarginTop(15).setMarginBottom(5));
 
-                // Création du tableau avec 2 colonnes : Nom et Filière
-                Table table = new Table(new float[]{4, 4}).setWidth(UnitValue.createPercentValue(95))
-                        .setMarginTop(15).setMarginBottom(15);
+                // Création du tableau avec 3 colonnes : Nom, Concours, Filière (exemple avec des colonnes égales)
+                Table table = new Table(new float[]{1, 1, 1})  // 1/3 de la largeur pour chaque colonne
+                        .setWidth(UnitValue.createPercentValue(100))
+                        .setMarginTop(15)
+                        .setMarginBottom(15);
+
 
                 // Ajouter les en-têtes du tableau
-                table.addHeaderCell(new Cell().add(new Paragraph("Nom").setFont(boldFont).setFontSize(18))
+                table.addHeaderCell(new Cell().add(new Paragraph("CIN").setFont(boldFont).setFontSize(18))
+                        .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
+                        .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER).setPadding(10));
+                table.addHeaderCell(new Cell().add(new Paragraph("Nom Complet").setFont(boldFont).setFontSize(18))
                         .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
                         .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER).setPadding(10));
                 table.addHeaderCell(new Cell().add(new Paragraph("Filière").setFont(boldFont).setFontSize(18))
@@ -228,6 +268,9 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
                 // Ajouter les données des candidats dans le tableau
                 for (Note note : entry.getValue()) {
                     // Ajouter une ligne pour chaque candidat avec son nom et sa filière
+                    table.addCell(new Cell().add(new Paragraph(note.getCIN()).setFont(font).setFontSize(20))
+                            .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                            .setPadding(8));
                     table.addCell(new Cell().add(new Paragraph(note.getNom()).setFont(font).setFontSize(20))
                             .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
                             .setPadding(8));
@@ -253,5 +296,87 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
 
     public void openAddNoteActivity(View view) {
         startActivity(new Intent(this, AddNoteActivity.class));
+    }
+    private void generatePDFResultat(List<Note> getCandidatsAdmis) {
+        try {
+            String filePath = getExternalFilesDir(null) + "/admis.pdf";
+            PdfWriter writer = new PdfWriter(filePath);
+            PdfDocument pdfDocument = new PdfDocument(writer);
+            Document document = new Document(pdfDocument);
+
+            // Charger et ajouter le logo
+            InputStream logoStream = getResources().openRawResource(R.drawable.logo_ensa);
+            byte[] logoBytes = new byte[logoStream.available()];
+            logoStream.read(logoBytes);
+            logoStream.close();
+
+            ImageData imageData = ImageDataFactory.create(logoBytes);
+            Image logo = new Image(imageData).setWidth(120).setHeight(120).setHorizontalAlignment(HorizontalAlignment.CENTER);
+            document.add(logo);
+
+            // Ajouter un titre et un sous-titre
+            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+            PdfFont boldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+            document.add(new Paragraph("Liste principale des admis au concours passerelle")
+                    .setFont(boldFont).setFontSize(24).setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                    .setFontColor(com.itextpdf.kernel.colors.ColorConstants.BLUE).setMarginBottom(10));
+
+            document.add(new Paragraph("Année Universitaire 2025-2026")
+                    .setFont(font).setFontSize(20).setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                    .setFontColor(com.itextpdf.kernel.colors.ColorConstants.GRAY).setMarginBottom(20));
+// Grouper les notes par filière et générer les tableaux
+            Map<String, List<Note>> candidatsParFiliere = getCandidatsAdmis.stream()
+                    .collect(Collectors.groupingBy(Note::getFiliere));
+
+            for (Map.Entry<String, List<Note>> entry : candidatsParFiliere.entrySet()) {
+                // Ajouter le titre de la filière
+                document.add(new Paragraph(entry.getKey())
+                        .setFont(boldFont).setFontSize(18).setFontColor(com.itextpdf.kernel.colors.ColorConstants.DARK_GRAY)
+                        .setMarginTop(15).setMarginBottom(5));
+
+
+                Table table = new Table(new float[]{1, 1, 1})  // 1/3 de la largeur pour chaque colonne
+                        .setWidth(UnitValue.createPercentValue(100))
+                        .setMarginTop(15)
+                        .setMarginBottom(15);
+
+
+                // Ajouter les en-têtes du tableau
+                table.addHeaderCell(new Cell().add(new Paragraph("CIN").setFont(boldFont).setFontSize(18))
+                        .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
+                        .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER).setPadding(10));
+
+                table.addHeaderCell(new Cell().add(new Paragraph("Nom Complet").setFont(boldFont).setFontSize(18))
+                        .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
+                        .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER).setPadding(10));
+                table.addHeaderCell(new Cell().add(new Paragraph("Filière").setFont(boldFont).setFontSize(18))
+                        .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
+                        .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER).setPadding(10));
+
+                // Ajouter les données des candidats dans le tableau
+                for (Note note : entry.getValue()) {
+                    // Ajouter une ligne pour chaque candidat avec son nom et sa filière
+                    table.addCell(new Cell().add(new Paragraph(note.getCIN()).setFont(font).setFontSize(20))
+                            .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                            .setPadding(8));
+                    table.addCell(new Cell().add(new Paragraph(note.getNom()).setFont(font).setFontSize(20))
+                            .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                            .setPadding(8));
+                    table.addCell(new Cell().add(new Paragraph(note.getFiliere()).setFont(font).setFontSize(20))
+                            .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
+                            .setPadding(8));
+                }
+
+                // Ajouter le tableau au document
+                document.add(table);
+            }
+
+
+            document.close();
+            Toast.makeText(this, "PDF généré : " + filePath, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur lors de la génération du PDF", Toast.LENGTH_SHORT).show();
+        }
     }
 }

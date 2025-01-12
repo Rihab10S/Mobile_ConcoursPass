@@ -47,7 +47,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         public TextView statutTextView;
         public TextView noteTextView;
         public TextView filiereTextView;
-        public TextView emailTextView;
+        public TextView CINTextView;
         public Button deleteButton;
         public Button editButton;
 
@@ -59,7 +59,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             statutTextView = itemView.findViewById(R.id.status_text);
             noteTextView = itemView.findViewById(R.id.note_text);
             filiereTextView = itemView.findViewById(R.id.filiere_text);
-            emailTextView = itemView.findViewById(R.id.email_text);
+            CINTextView = itemView.findViewById(R.id.CIN_text);
             deleteButton = itemView.findViewById(R.id.delete_button);
             editButton = itemView.findViewById(R.id.edit_button);  // Ajouter le bouton Edit
         }
@@ -77,10 +77,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         holder.idTextView.setText(String.valueOf(note.getId()));
         holder.nomTextView.setText(note.getNom());
         holder.concoursTextView.setText(note.getConcours());
-        holder.statutTextView.setText(note.getStatut());
+        holder.statutTextView.setText(note.getStatutOral());
         holder.noteTextView.setText(String.valueOf(note.getNote()));
         holder.filiereTextView.setText(note.getFiliere());
-        holder.emailTextView.setText(note.getEmail());
+
+        holder.CINTextView.setText(note.getCIN());
 
         // Appliquer la couleur et le style en fonction du seuil
         if (seuil >= 0) {
@@ -112,10 +113,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             intent.putExtra("noteId", note.getId());
             intent.putExtra("noteNom", note.getNom());
             intent.putExtra("noteConcours", note.getConcours());
-            intent.putExtra("noteStatut", note.getStatut());
+            intent.putExtra("noteStatutOral", note.getStatutOral());
             intent.putExtra("noteFiliere", note.getFiliere());
-            intent.putExtra("noteEmail", note.getEmail());
+            intent.putExtra("noteCIN", note.getCIN());
             intent.putExtra("noteValue", note.getNote());
+
             holder.itemView.getContext().startActivity(intent);
         });
     }
@@ -157,6 +159,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public int getItemCount() {
         return notes.size();
     }
+    public List<Note> getNotes() {
+        return notes;
+    }
     public List<Note> getCandidatsAuDessusDuSeuil() {
         List<Note> candidatsAuDessusDuSeuil = new ArrayList<>();
         for (Note note : notes) {
@@ -166,6 +171,16 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         }
         return candidatsAuDessusDuSeuil;
     }
+    public List<Note> getCandidatsAdmis() {
+        List<Note> candidatsAdmis = new ArrayList<>();
+        for (Note note : notes) {
+            if (note.getStatutOral().equalsIgnoreCase("admis")) {
+                candidatsAdmis.add(note);
+            }
+        }
+        return candidatsAdmis;
+    }
+
 
     public void updateNotes(List<Note> newNotes) {
         notes.clear();

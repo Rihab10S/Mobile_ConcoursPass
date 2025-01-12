@@ -5,37 +5,40 @@ public class Note {
     private Long id;
     private String nom;
     private String concours;
-    private String statut;
+    private String statutOral;
     private double note;
     private String filiere;
-    private String email;
+    private String cin;
     private Boolean statuSendAdmin;
     private Boolean statusPublication;
 
     // Constructeur avec tous les paramètres
-    public Note(Long id, String nom, String concours, String statut, double note, String filiere, String email, Boolean statuSendAdmin, Boolean statusPublication) {
+    public Note(Long id, String nom, String concours, String statutOral, double note, String filiere,  String cin, Boolean statuSendAdmin, Boolean statusPublication) {
         this.id = id;
         this.nom = nom;
         this.concours = concours;
-        this.statut = statut;
+        this.statutOral= statutOral;
         this.note = note;
         this.filiere = filiere;
-        this.email = email;
+        this.cin = cin;  // Correctement assigner CIN
         this.statuSendAdmin = statuSendAdmin;
         this.statusPublication = statusPublication;
     }
 
     // Constructeur sans id et statuSendAdmin, statusPublication
-    public Note(String nom, String concours, String statut, double note, String filiere, String email) {
+    public Note(String nom, String concours, double note, String filiere, String cin) {
         this.nom = nom;
         this.concours = concours;
-        this.statut = statut;
         this.note = note;
         this.filiere = filiere;
-        this.email = email;
-        this.statuSendAdmin = false;
-        this.statusPublication = false;
+        this.cin = cin;
+        this.statutOral = "R_Oral";
+        this.statuSendAdmin = false;  // Par défaut
+        this.statusPublication = false;  // Par défaut
     }
+
+
+
 
     // Getters et setters
     public Long getId() {
@@ -44,6 +47,14 @@ public class Note {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCIN() {
+        return cin;
+    }
+
+    public void setCIN(String CIN) {
+        this.cin = CIN; // Assurez-vous de modifier CIN et non id
     }
 
     public String getNom() {
@@ -62,12 +73,12 @@ public class Note {
         this.concours = concours;
     }
 
-    public String getStatut() {
-        return statut;
+    public String getStatutOral() {
+        return statutOral;
     }
 
-    public void setStatut(String statut) {
-        this.statut = statut;
+    public void setStatutOral(String status_orale) {
+        this.statutOral = status_orale;
     }
 
     public double getNote() {
@@ -86,13 +97,6 @@ public class Note {
         this.filiere = filiere;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Boolean getStatuSendAdmin() {
         return statuSendAdmin;

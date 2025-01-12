@@ -208,7 +208,7 @@ public class PreinscritListActivity extends AppCompatActivity {
 
                 // Ajouter des en-têtes au tableau avec style
                 table.addHeaderCell(new Cell()
-                        .add(new Paragraph("Nom ").setFont(boldFont).setFontSize(18)) // Agrandir la taille de la police des en-têtes
+                        .add(new Paragraph("Nom Complet ").setFont(boldFont).setFontSize(18)) // Agrandir la taille de la police des en-têtes
                         .setBackgroundColor(com.itextpdf.kernel.colors.ColorConstants.LIGHT_GRAY)
                         .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
                         .setPadding(10));
@@ -231,7 +231,7 @@ public class PreinscritListActivity extends AppCompatActivity {
                 // Ajouter les données des candidats avec des cellules plus grandes et une police agrandie
                 for (Candidat candidat : entry.getValue()) {
                     table.addCell(new Cell()
-                            .add(new Paragraph(candidat.getNom()).setFont(font).setFontSize(20)) // Police plus grande pour les valeurs
+                            .add(new Paragraph(candidat.getNomComplet()).setFont(font).setFontSize(20)) // Police plus grande pour les valeurs
                             .setTextAlignment(com.itextpdf.layout.properties.TextAlignment.CENTER)
                             .setPadding(8));
                     table.addCell(new Cell()
