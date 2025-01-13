@@ -1,5 +1,6 @@
 package com.example.concours_passerelle.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.itextpdf.io.image.ImageData;
@@ -86,6 +88,8 @@ public class PreinscritListActivity extends AppCompatActivity {
 
         // Setup RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
 
         // Spinner event listener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -185,7 +189,8 @@ public class PreinscritListActivity extends AppCompatActivity {
 
             // Grouper les candidats par filière
             Map<String, List<Candidat>> candidatsParFiliere = candidatsAuDessusDuSeuil.stream()
-                    .collect(Collectors.groupingBy(Candidat::getFiliereChoisi));
+                    .collect(Collectors.groupingBy(c -> c.getFiliereChoisi()));
+
 
             for (Map.Entry<String, List<Candidat>> entry : candidatsParFiliere.entrySet()) {
                 // Ajouter un sous-titre pour chaque filière

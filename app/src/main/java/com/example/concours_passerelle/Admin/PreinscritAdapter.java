@@ -1,11 +1,14 @@
 package com.example.concours_passerelle.Admin;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,19 +32,16 @@ public class PreinscritAdapter extends RecyclerView.Adapter<PreinscritAdapter.Ca
 
     public void setSeuil(double seuil) {
         this.seuil = seuil;
-
-        notifyDataSetChanged();
-
+        notifyDataSetChanged(); // Notifier le changement des données
     }
-
 
     @NonNull
     @Override
     public CandidatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_liste_preinscrit, parent, false);
         return new CandidatViewHolder(view);
     }
+
     public List<Candidat> getCandidatsAuDessusDuSeuil() {
         List<Candidat> result = new ArrayList<>();
         for (Candidat candidat : candidats) {
@@ -51,7 +51,6 @@ public class PreinscritAdapter extends RecyclerView.Adapter<PreinscritAdapter.Ca
         }
         return result;
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull CandidatViewHolder holder, int position) {
@@ -63,6 +62,23 @@ public class PreinscritAdapter extends RecyclerView.Adapter<PreinscritAdapter.Ca
         holder.tvCodeEtudiant.setText(candidat.getCodeEtudiant());
         holder.tvFiliere.setText(candidat.getFiliereChoisi());
         holder.tvNoteMoyenne.setText(String.valueOf(candidat.getNoteMoyenne()));
+
+        // Gestion du clic sur l'icône de l'œil
+        holder.eyeImageView.setOnClickListener(v -> {
+            // Démarrer une nouvelle activité lorsque l'icône de l'œil est cliquée
+            Context context = v.getContext();
+            Intent intent = new Intent(context, CandidatDetailListActivity.class); // Remplacer `CandidatDetailListActivity.class` par l'activité cible
+
+            // Passer toutes les informations du candidat à l'Intent
+            intent.putExtra("candidat_id", candidat.getIdCandidat());
+            intent.putExtra("candidat_nom", candidat.getNomComplet());
+            intent.putExtra("candidat_cin", candidat.getCin());
+            intent.putExtra("candidat_code", candidat.getCodeEtudiant());
+            intent.putExtra("candidat_filiere", candidat.getFiliereChoisi());
+            intent.putExtra("candidat_note", candidat.getNoteMoyenne());
+
+            context.startActivity(intent);
+        });
 
         // Appliquer la couleur et le style en fonction du seuil
         if (seuil >= 0) {
@@ -90,6 +106,7 @@ public class PreinscritAdapter extends RecyclerView.Adapter<PreinscritAdapter.Ca
     public static class CandidatViewHolder extends RecyclerView.ViewHolder {
         TextView tvNom, tvCin, tvCodeEtudiant, tvFiliere, tvNoteMoyenne;
         CardView cardView;
+        ImageView eyeImageView;  // Ajoutez la référence à l'ImageView
 
         public CandidatViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +116,7 @@ public class PreinscritAdapter extends RecyclerView.Adapter<PreinscritAdapter.Ca
             tvCodeEtudiant = itemView.findViewById(R.id.tv_code);
             tvFiliere = itemView.findViewById(R.id.tv_filiere);
             tvNoteMoyenne = itemView.findViewById(R.id.tv_note);
+            eyeImageView = itemView.findViewById(R.id.eyeImageView); // Référence à l'ImageView de l'œil
         }
     }
 

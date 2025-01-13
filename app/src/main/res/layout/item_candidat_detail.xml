@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Données Personnelles -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:text="Données Personnelles"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:gravity="center"
+            android:textColor="#1E88E5"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_nom"
+            android:text="Nom : "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+        <TextView
+            android:id="@+id/tv_prenom"
+            android:text="Prenom : "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_cin"
+            android:text="CIN: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_date_naissance"
+            android:text="Date de Naissance: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_telephone"
+            android:text="Téléphone: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:text="Email: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_filiere"
+            android:text="Filière Choisie: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_cne"
+            android:text="Code étudiant: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+    </LinearLayout>
+
+    <!-- Données Bac -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:text="Information sur le Bac"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:textColor="#FF5722"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_serie_bac"
+            android:text="Série Bac: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_mention_bac"
+            android:text="Mention Bac: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_relevé_bac"
+            android:text="Relevé Bac: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+    </LinearLayout>
+
+    <!-- Données Diplôme -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+      >
+
+        <TextView
+            android:text="Information sur le Diplôme"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:textColor="#4CAF50"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_titre_diplome"
+            android:text="Titre du Diplome: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_note_premiere_annee"
+            android:text="Note Première Année: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_note_deuxieme_annee"
+            android:text="Note Deuxième Année: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_etablissement"
+            android:text="Etablissement: "
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:paddingBottom="6dp"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

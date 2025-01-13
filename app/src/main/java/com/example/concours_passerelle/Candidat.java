@@ -9,6 +9,19 @@ public class Candidat {
     private float notePremiereAnnee;
     private float noteDeuxiemeAnnee;
     private double noteMoyenne; // Champ calculé
+    private String dateNaissance;
+    private String email;
+    private String etablissement;
+    private String genre;
+    private String mentionBac;
+    private String pays;
+    private String releveBac;
+    private String releveDiplomeAnnee1;
+    private String releveDiplomeAnnee2;
+    private String serieBac;
+    private String tel;
+    private String titreDiplome;
+    private String ville;
 
     // Getters et Setters
     public Long getIdCandidat() {
@@ -61,11 +74,127 @@ public class Candidat {
     public float getNoteMoyenne() {
         return (notePremiereAnnee + noteDeuxiemeAnnee) / 2;
     }
-
     public String getNomComplet() {
-        return nom + " " + prenom; // Combinaison du nom et prénom
+        return nom + " " + prenom;
     }
-    public void setNoteMoyenne(double noteMoyenne) {
-        this.noteMoyenne = noteMoyenne;
+
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public float getNotePremiereAnnee() {
+        return notePremiereAnnee;
+    }
+
+    public void setNotePremiereAnnee(float notePremiereAnnee) {
+        this.notePremiereAnnee = notePremiereAnnee;
+    }
+
+    public float getNoteDeuxiemeAnnee() {
+        return noteDeuxiemeAnnee;
+    }
+
+    public void setNoteDeuxiemeAnnee(float noteDeuxiemeAnnee) {
+        this.noteDeuxiemeAnnee = noteDeuxiemeAnnee;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEtablissement() {
+        return etablissement;
+    }
+
+    public void setEtablissement(String etablissement) {
+        this.etablissement = etablissement;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getMentionBac() {
+        return mentionBac;
+    }
+
+    public void setMentionBac(String mentionBac) {
+        this.mentionBac = mentionBac;
+    }
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
+    }
+
+    public String getReleveBac() {
+        return releveBac;
+    }
+
+    public void setReleveBac(String releveBac) {
+        this.releveBac = releveBac;
+    }
+
+    public String getReleveDiplomeAnnee1() {
+        return releveDiplomeAnnee1;
+    }
+
+    public void setReleveDiplomeAnnee1(String releveDiplomeAnnee1) {
+        this.releveDiplomeAnnee1 = releveDiplomeAnnee1;
+    }
+
+    public String getReleveDiplomeAnnee2() {
+        return releveDiplomeAnnee2;
+    }
+
+    public void setReleveDiplomeAnnee2(String releveDiplomeAnnee2) {
+        this.releveDiplomeAnnee2 = releveDiplomeAnnee2;
+    }
+
+    public String getSerieBac() {
+        return serieBac;
+    }
+
+    public void setSerieBac(String serieBac) {
+        this.serieBac = serieBac;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getTitreDiplome() {
+        return titreDiplome;
+    }
+
+    public void setTitreDiplome(String titreDiplome) {
+        this.titreDiplome = titreDiplome;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 }
+

@@ -60,6 +60,8 @@
             android:name=".HomeActivity"
             android:exported="false" />
 
+        <activity android:name=".Admin.CandidatDetailListActivity"
+            android:exported="false" />
         <activity android:name=".Admin.CreateAnnonceActivity"
             android:exported="false"
             android:label="Creer des Annonces"/>

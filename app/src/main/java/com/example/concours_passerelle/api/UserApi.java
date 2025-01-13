@@ -15,7 +15,7 @@ import java.util.List;
 public interface UserApi {
 
     @POST("users/login")
-    Call<UserResponse> loginUser(@Body UserLoginRequest userLoginRequest);
+    Call<UserResponse> login(@Body UserLoginRequest userLoginRequest);
 
     @POST("users")
     Call<UserResponse> createUser(@Body UserRequest userRequest);

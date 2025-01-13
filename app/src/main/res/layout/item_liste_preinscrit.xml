@@ -66,6 +66,13 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium" />
 
+        <ImageView
+            android:id="@+id/eyeImageView"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_eye_on" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

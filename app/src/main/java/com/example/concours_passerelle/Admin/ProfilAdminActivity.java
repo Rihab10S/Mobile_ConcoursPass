@@ -21,10 +21,20 @@ public class ProfilAdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil);
-
+        setContentView(R.layout.activity_profil_admin);
+        Button btnRetour = findViewById(R.id.btnretour);
         drawerLayout = findViewById(R.id.drawer_layout);
         navView = findViewById(R.id.nav_view);
+
+        btnRetour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créer un Intent pour naviguer vers DashboardAdminActivity
+                Intent intent = new Intent(ProfilAdminActivity.this, AdminDashboardActivity.class);
+                startActivity(intent);  // Démarrer l'activité
+                finish();  // Facultatif : Ferme l'activité actuelle (ProfilAdminActivity)
+            }
+        });
 
         // Configurer la Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -53,12 +63,8 @@ public class ProfilAdminActivity extends AppCompatActivity {
             }
         });
 
-        Button btnEditProfil = findViewById(R.id.btnEditProfil);
-        btnEditProfil.setOnClickListener(v -> {
-            // Démarrer EditProfilActivity
-            Intent intent = new Intent(ProfilAdminActivity.this, EditProfilAdminActivity.class);
-            startActivity(intent);
-        });
+
+
     }
 
     @Override

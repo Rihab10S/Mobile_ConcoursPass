@@ -1,5 +1,7 @@
 package com.example.concours_passerelle.Admin;
 
+import com.example.concours_passerelle.Candidate.CandidatApi;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -8,11 +10,13 @@ public class RetrofitInstance {
 
     private static final String BASE_URL = "http://10.0.2.2:8082/api/notes/";
     private static final String ANNONCE_BASE_URL = "http://10.0.2.2:8082/api/annonces/";  // Annonces URL
-    private static final String preinscrit_BASE_URL = "http://10.0.2.2:8082/api/inscrits/";  // liste preinscrits  URL
+    private static final String preinscrit_BASE_URL = "http://10.0.2.2:8082/api/inscrits/";
+    private static final String detail_BASE_URL = "http://10.0.2.2:8082/PasserelleApi/candidate/";// liste preinscrits  URL
     // Declare static fields without initialization
     private static OkHttpClient client;
     private static AnnonceApi annonceApi;
     private static PreinscritApi preinscritApi;
+    private static CandidatApi detailApi;
 
 
     private static NoteApi noteApi;
@@ -20,7 +24,7 @@ public class RetrofitInstance {
     public static NoteApi api;
 
     // Initialize client, if not already done
-    private static OkHttpClient getClient() {
+    static OkHttpClient getClient() {
         if (client == null) {
             client = new OkHttpClient.Builder()
                     .addInterceptor(chain -> {
@@ -49,7 +53,15 @@ public class RetrofitInstance {
         }
         return annonceApi;
     }
-    // Initialize and get the AnnonceApi
+
+    public static CandidatApi getDetailApi() {
+        if (detailApi == null) {
+            detailApi = createApiForDetails();
+        }
+        return detailApi;
+    }
+
+
     public static PreinscritApi getPreinscritApi() {
         if (preinscritApi == null) {
             preinscritApi = createApiForPreinscrit();
@@ -84,6 +96,15 @@ public class RetrofitInstance {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(PreinscritApi.class);
+    }
+
+    private static CandidatApi  createApiForDetails() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(detail_BASE_URL)
+                .client(getClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(CandidatApi.class);
     }
 
 

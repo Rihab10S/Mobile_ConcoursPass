@@ -19,100 +19,76 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:background="#FAFAFA">
+        android:background="#F5F5F5">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="20dp"
+            android:paddingTop="40dp"
             android:paddingBottom="20dp">
 
+            <!-- En-tête de profil (modifié la taille de l'image) -->
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="match_parent"
-                android:layout_height="71dp"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:contentDescription="Image de l'en-tête"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/img" />
 
+            <!-- Espacement -->
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="111dp" />
+                android:layout_height="40dp" />
 
+            <!-- Photo de profil (ajusté la taille et espacé) -->
             <ImageView
                 android:id="@+id/ivProfilPic"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:src="@drawable/ic_user_profile"
                 android:scaleType="centerCrop"
                 android:background="@drawable/circle_background"
                 android:elevation="8dp"
                 android:layout_marginBottom="20dp"
-                android:contentDescription="Profil Picture" />
+                android:contentDescription="Photo de profil" />
 
+            <!-- Nom de l'utilisateur -->
             <TextView
                 android:id="@+id/tvFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nom Prénom"
-                android:textSize="22sp"
+                android:text="Admin User"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="#212121"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="12dp" />
 
+            <!-- Email de l'utilisateur -->
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email: candidat@gmail.com"
-                android:textSize="16sp"
+                android:text="Email: admin2025@gmail.com"
+                android:textSize="18sp"
                 android:textColor="#757575"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="40dp" />
 
-            <TextView
-                android:id="@+id/tvPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Téléphone: 06 00 00 00 00"
-                android:textSize="16sp"
-                android:textColor="#757575"
-                android:layout_marginBottom="12dp" />
 
-            <TextView
-                android:id="@+id/tvBirthDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date de naissance: 01/01/2000"
-                android:textSize="16sp"
-                android:textColor="#757575"
-                android:layout_marginBottom="25dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="106dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0"
-                android:layout_marginBottom="25dp" />
 
             <Button
-                android:id="@+id/btnEditProfil"
-                android:layout_width="302dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
+                android:id="@+id/btnretour"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_button"
-                android:text="Modifier le profil"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:text="Retour"
+                android:textColor="#FFFFFF" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
+
 
     </ScrollView>
 
