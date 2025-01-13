@@ -47,7 +47,13 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, CandidateDashboardActivity.class);
                 startActivity(intent);
                 finish();
-            } else {
+            }
+            else if (useremail.equals("coordinateur@gmail.com") && password.equals("coo1234")) {
+                // Rediriger vers CandidatDashboardActivity si l'utilisateur est un candidat
+                Intent intent = new Intent(LoginActivity.this, CoordinateurActivity.class);
+                startActivity(intent);
+                finish();
+            }else {
                 // Afficher un message d'erreur si les identifiants sont incorrects
                 Toast.makeText(LoginActivity.this, "Identifiants incorrects !", Toast.LENGTH_SHORT).show();
             }

@@ -42,6 +42,9 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".CoordinateurActivity"
+            android:exported="false" />
+        <activity
             android:name=".CongratulationsActivity"
             android:exported="false" />
         <activity
@@ -49,6 +52,9 @@
             android:exported="false" />
         <activity
             android:name=".Candidate.CreateProfileCandidateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Candidate.ConvocationsActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

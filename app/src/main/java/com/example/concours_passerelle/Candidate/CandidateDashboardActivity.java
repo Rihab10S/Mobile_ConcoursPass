@@ -6,6 +6,13 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+
+import com.example.concours_passerelle.Admin.AdminDashboardActivity;
+import com.example.concours_passerelle.Admin.AnnonceListActivity;
+import com.example.concours_passerelle.Admin.GestionNotesAdminActivity;
+import com.example.concours_passerelle.Admin.PreinscritListActivity;
+import com.example.concours_passerelle.Admin.ProfilAdminActivity;
+import com.example.concours_passerelle.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -36,7 +43,17 @@ public class CandidateDashboardActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Configurer les éléments de navigation
+        navView.setNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_convocation) {
+                startActivity(new Intent(CandidateDashboardActivity.this, ConvocationsActivity.class));
 
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
     }
 
     @Override

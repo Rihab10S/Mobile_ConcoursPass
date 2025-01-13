@@ -7,8 +7,8 @@
         android:id="@+id/nav_profil"
         android:title="Profil" />
     <item
-        android:id="@+id/nav_cursus"
-        android:title="Cursus" />
+        android:id="@+id/nav_convocation"
+        android:title="Mes Convocations" />
     <item
         android:id="@+id/nav_messages"
         android:title="Messages" />

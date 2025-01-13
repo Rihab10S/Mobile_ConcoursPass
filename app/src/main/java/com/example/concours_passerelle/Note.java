@@ -12,6 +12,7 @@ public class Note {
     private Boolean statuSendAdmin;
     private Boolean statusPublication;
 
+
     // Constructeur avec tous les paramètres
     public Note(Long id, String nom, String concours, String statutOral, double note, String filiere,  String cin, Boolean statuSendAdmin, Boolean statusPublication) {
         this.id = id;
