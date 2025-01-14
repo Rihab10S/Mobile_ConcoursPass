@@ -105,9 +105,12 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent;
         if (email.equals("Admin2025@gmail.com")) {
             intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+        } else if (email.equals("coordinateur@gmail.com")) {
+            intent = new Intent(LoginActivity.this, CoordinateurActivity.class);
         } else {
             intent = new Intent(LoginActivity.this, CandidateDashboardActivity.class);
         }
+
         // Passer l'ID utilisateur à l'Intent
         intent.putExtra("user_id", userId);
         startActivity(intent);

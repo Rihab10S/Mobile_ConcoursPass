@@ -1,6 +1,7 @@
 package com.example.concours_passerelle.Admin;
 
 import com.example.concours_passerelle.Candidate.CandidatApi;
+import com.example.concours_passerelle.SeuilApi;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -12,11 +13,14 @@ public class RetrofitInstance {
     private static final String ANNONCE_BASE_URL = "http://10.0.2.2:8082/api/annonces/";  // Annonces URL
     private static final String preinscrit_BASE_URL = "http://10.0.2.2:8082/api/inscrits/";
     private static final String detail_BASE_URL = "http://10.0.2.2:8082/PasserelleApi/candidate/";// liste preinscrits  URL
+    private static final String seuil_BASE_URL = "http://10.0.2.2:8082/PasserelleApi/candidate/";
     // Declare static fields without initialization
     private static OkHttpClient client;
     private static AnnonceApi annonceApi;
     private static PreinscritApi preinscritApi;
     private static CandidatApi detailApi;
+    private static SeuilApi seuilApi;
+
 
 
     private static NoteApi noteApi;
@@ -68,6 +72,12 @@ public class RetrofitInstance {
         }
         return preinscritApi;
     }
+    public static SeuilApi getSeuilApi() {
+        if (seuilApi == null) {
+            seuilApi = createApiForSeuil();
+        }
+        return seuilApi;
+    }
 
     // Helper method to create Retrofit instance for NoteApi
     private static NoteApi createApi(String baseUrl) {
@@ -109,4 +119,12 @@ public class RetrofitInstance {
 
 
 
+    private static SeuilApi   createApiForSeuil() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(seuil_BASE_URL)
+                .client(getClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(SeuilApi.class);
+    }
 }

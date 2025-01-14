@@ -131,7 +131,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="#4CAF50"
-                    android:text="AJOUTER une nouvelle NOTE"
+                    android:text="AJOUTER NOTE"
+                    android:onClick="openAddNoteActivity"
+                    android:textColor="#FFFFFF" />
+                <Button
+                    android:id="@+id/btn_env_liste_orale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#2196F3"
+                    android:text="Envoyer la liste de l'oral"
                     android:onClick="openAddNoteActivity"
                     android:textColor="#FFFFFF" />
 

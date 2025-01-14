@@ -20,6 +20,8 @@ import com.example.concours_passerelle.Candidat;
 import com.example.concours_passerelle.Note;
 import com.example.concours_passerelle.NoteAdapter;
 import com.example.concours_passerelle.R;
+import com.example.concours_passerelle.SeuilApi;
+import com.example.concours_passerelle.SeuilOralEntity;
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -80,6 +82,7 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
         // Button click listener pour générer le PDF
         setupDownloadButtonResultat();
 
+
         // Charger les notes sans filtre au démarrage
         fetchNotes("");
     }
@@ -91,6 +94,10 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
         seuilEditText = findViewById(R.id.filter_edit_text);
         telechargerBtn = findViewById(R.id.btn_telecharger_liste_orale);
         telechargerBtnAdmis = findViewById(R.id.btn_telecharger_liste_finale);
+        // Initialisation du bouton pour envoyer le seuil
+        Button envoyerSeuilBtn = findViewById(R.id.btn_env_liste_orale);
+        envoyerSeuilBtn.setOnClickListener(view -> envoyerSeuil());
+
     }
 
     private void setupRecyclerView() {
@@ -173,6 +180,46 @@ public class GestionNotesAdminActivity extends AppCompatActivity {
             }
         });
     }
+    // Nouvelle méthode pour envoyer le seuil à l'API
+    private void envoyerSeuil() {
+        String seuilStr = seuilEditText.getText().toString().trim();
+        if (seuilStr.isEmpty()) {
+            Toast.makeText(this, "Veuillez entrer une valeur pour le seuil.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Convertir la valeur saisie en float
+        float seuil = Float.parseFloat(seuilStr);
+
+        // Créer l'objet SeuilOralEntity avec la valeur du seuil
+        SeuilOralEntity seuilEntity = new SeuilOralEntity();
+        seuilEntity.setSeuil(seuil);
+
+        // Récupérer l'API Seuil
+        SeuilApi seuilApi = RetrofitInstance.getSeuilApi();
+
+        // Appeler l'API pour mettre à jour le seuil
+        Call<SeuilOralEntity> call = seuilApi.updateSeuil(seuilEntity); // Utiliser l'objet SeuilOralEntity
+        call.enqueue(new Callback<SeuilOralEntity>() {
+            @Override
+            public void onResponse(Call<SeuilOralEntity> call, Response<SeuilOralEntity> response) {
+                if (response.isSuccessful()) {
+                    // Afficher un message de succès
+                    Toast.makeText(GestionNotesAdminActivity.this, "Liste Orale envoyé avec succès !", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Afficher un message d'erreur avec le code de réponse
+                    showError("Erreur lors de l'envoi du seuil : " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SeuilOralEntity> call, Throwable t) {
+                // Afficher un message d'erreur réseau
+                showError("Erreur réseau : " + t.getMessage());
+            }
+        });
+    }
+
 
 
     private void fetchNotes(String filiere) {

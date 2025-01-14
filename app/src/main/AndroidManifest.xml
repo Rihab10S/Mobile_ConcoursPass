@@ -56,8 +56,12 @@
         <activity
             android:name=".Candidate.ConvocationsActivity"
             android:exported="false" />
+
         <activity
             android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CoordinateurEditOralActivity"
             android:exported="false" />
 
         <activity android:name=".Admin.CandidatDetailListActivity"

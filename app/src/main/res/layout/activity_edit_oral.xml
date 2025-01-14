@@ -29,7 +29,8 @@
         android:text="Ajouter le résultat de l'oral"
         android:textColor="#3A87F7"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:enabled="false" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -50,7 +51,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="Nom"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:enabled="false"/>
 
             <EditText
                 android:id="@+id/edit_concours"
@@ -59,7 +61,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="Concours"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:enabled="false" />
 
 
 
@@ -70,7 +73,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="Filière"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:enabled="false" />
 
             <EditText
                 android:id="@+id/edit_CIN"
@@ -79,7 +83,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_rounded"
                 android:hint="CIN"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:enabled="false" />
 
             <EditText
                 android:id="@+id/edit_note"
@@ -89,7 +94,8 @@
                 android:background="@drawable/edittext_rounded"
                 android:hint="Note"
                 android:inputType="numberDecimal"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:enabled="false" />
 
             <EditText
                 android:id="@+id/edit_Statut_oral"
