@@ -22,7 +22,13 @@ public class Candidat {
     private String tel;
     private String titreDiplome;
     private String ville;
+    private String copiediplome;
 
+
+
+    public void setCopiediplome(String copiediplome) {
+        this.copiediplome = copiediplome;
+    }
     // Getters et Setters
     public Long getIdCandidat() {
         return idCandidat;

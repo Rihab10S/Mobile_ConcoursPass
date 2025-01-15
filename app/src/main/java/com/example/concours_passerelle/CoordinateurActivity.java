@@ -162,7 +162,7 @@ public class CoordinateurActivity extends AppCompatActivity {
     private List<Note> filterNotesBySeuil(List<Note> notes) {
         List<Note> filteredNotes = new ArrayList<>();
         for (Note note : notes) {
-            if (note.getNote() >= seuil) {
+            if (note.getNote() > seuil) {
                 filteredNotes.add(note);
             }
         }

@@ -56,6 +56,8 @@ public class CandidateDashboardActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_convocation) {
                 startActivity(new Intent(CandidateDashboardActivity.this, ConvocationsActivity.class));
+            } else if (itemId == R.id.nav_inscription) {
+                startActivity(new Intent(CandidateDashboardActivity.this, Form_Candidat.class));
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;

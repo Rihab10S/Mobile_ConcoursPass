@@ -60,6 +60,8 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
+        <activity android:name=".Candidate.Form_Candidat"
+            android:exported="false"  />
         <activity
             android:name=".CoordinateurEditOralActivity"
             android:exported="false" />
